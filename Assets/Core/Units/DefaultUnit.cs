@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.Units
 {
-    public class DefaultUnit : IPlayableUnit, IDisposable
+    public class DefaultUnit : IPlayableUnit
     {
         private UnitValuesContainer _unitValuesContainer;
         
@@ -59,11 +59,6 @@ namespace Core.Units
         public void DestroyUnit()
         {
             _unitValuesContainer.Destroy();
-            Dispose();
-        }
-
-        public void Dispose()
-        {
             GC.SuppressFinalize(this);
         }
     }
