@@ -8,6 +8,8 @@ namespace Core.Units
         public static Transform EnemySceneContainer;
         public static Transform PlayerSceneContainer;
         
+        private static int _spawnedUnits;
+        
         public static IPlayableUnit CreateUnit(UnitSettingsDescription description, Vector3 position, bool isEnemy)
         {
             IPlayableUnit playableUnit = null;
@@ -16,21 +18,26 @@ namespace Core.Units
             switch (description.UnitType)
             {
                 case UnitTypes.Default:
-                    playableUnit = CreateDefaultUnit(description, parentTransform, position);
+                    playableUnit = CreateDefaultUnit(description, parentTransform, position, isEnemy);
                     break;
             }
             return playableUnit;
         }
         
-        private static IPlayableUnit CreateDefaultUnit(UnitSettingsDescription description, Transform parent, Vector3 position)
+        
+        
+        private static IPlayableUnit CreateDefaultUnit(UnitSettingsDescription description, Transform parent, Vector3 position, bool isEnemy)
         {
             IPlayableUnit playableUnit = new DefaultUnit();
-            UnitSceneContainer sceneContainer = Object.Instantiate(description.UnitPrefab, parent);
-            sceneContainer.UnitTransform.localPosition = position;
-            IUnitSystem[] unitSystems = new IUnitSystem[1];
-            unitSystems[0] = new SimpleUnitMoveSystem();
-            UnitValuesContainer valuesContainer = new UnitValuesContainer(description, sceneContainer, unitSystems);
-            playableUnit.SetUnitValues(valuesContainer);
+            UnitSceneContainer sceneContainer = Object.Instantiate(description.UnitPrefab, position, Quaternion.identity, parent);
+            sceneContainer.UnitGameObject.name += _spawnedUnits;
+            IUnitSystem[] unitSystems = new IUnitSystem[3];
+            unitSystems[0] = new UnitTargetingSystem();
+            unitSystems[1] = new UnitHitSystem();
+            unitSystems[2] = new SimpleUnitMoveSystem();
+            UnitValuesContainer valuesContainer = new UnitValuesContainer(description, sceneContainer, unitSystems, isEnemy);
+            playableUnit.SetUnitValuesContainer(valuesContainer);
+            _spawnedUnits++;
             return playableUnit;
         }
     }

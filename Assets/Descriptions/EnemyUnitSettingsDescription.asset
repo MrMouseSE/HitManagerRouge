@@ -23,3 +23,4 @@ MonoBehaviour:
   - Value: 0.1
     Type: 0
   UnitSpeed: 5
+  UnitBouncePower: 1.3

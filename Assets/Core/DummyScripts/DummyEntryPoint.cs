@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Core.EnemiesScripts;
 using Core.GameplayControllers;
 using Core.Units;
 using UnityEngine;
@@ -7,26 +7,31 @@ namespace Core.DummyScripts
 {
     public class DummyEntryPoint : MonoBehaviour
     {
+        public int CurrentDifficulty;
+        public EnemiesSpawnDescription EnemiesSpawnDescription;
         
-        private List<IGameplayController> _gameplayControllers = new List<IGameplayController>();
+        private GameplayControllersHandler _gameplayControllersHandler;
         
         private void Awake()
         {
-            _gameplayControllers.Add(new UnitsController());
+            
+            IGameplayController[] gameplayControllers = new IGameplayController[2]
+            {
+                new UnitsController(),
+                new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty))
+            };
+            _gameplayControllersHandler = new GameplayControllersHandler(gameplayControllers);
         }
 
         private void Update()
         {
-            foreach (IGameplayController gameplayController in _gameplayControllers)
-            {
-                gameplayController.UpdateController(Time.deltaTime);
-            }
+            _gameplayControllersHandler.UpdateGameplayControllers(Time.deltaTime);
         }
 
         public void SpawnNewUnit(UnitSettingsDescription description, Vector3 position, bool isEnemy)
         {
-            UnitsController unitsController = (UnitsController)_gameplayControllers.Find(x => x.GetType() == typeof(UnitsController));
-            unitsController.CreatePlayableUnit(description, position, isEnemy);
+            _gameplayControllersHandler.GetUnitsController(
+                typeof(UnitsController)).CreatePlayableUnit(description, position, isEnemy);
         }
     }
 }

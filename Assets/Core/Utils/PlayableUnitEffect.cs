@@ -14,35 +14,38 @@ namespace Core.Utils
         public ParticleSystem EffectParticleSystem;
         public TransformAnimationType EffectTransformAnimationType;
 
-        public void Play()
+        public float PlayAndReturnDuration()
         {
-            if (HasEffectAnimation)
-            {
-                EffectAnimation.Play();
-            }
-
             if (HasEffectParticleSystem)
             {
                 EffectParticleSystem.Play();
             }
-
+            
+            if (HasEffectAnimation)
+            {
+                EffectAnimation.Play();
+                return EffectAnimation.clip.length;
+            }
+            
+            float duration = EffectTransformAnimationType.EffectCurve.keys[^1].time;
             switch (EffectTransformAnimationType.AnimationType)
             {
                 case AnimationTypes.Move:
                     EffectTransformAnimationType.TweenTransform.DOMove(EffectTransformAnimationType.To, 
-                        EffectTransformAnimationType.EffectCurve.keys[^1].time).SetEase(EffectTransformAnimationType.EffectCurve);
+                        duration).SetEase(EffectTransformAnimationType.EffectCurve);
                     break;
                 case AnimationTypes.Rotate:
                     EffectTransformAnimationType.TweenTransform.DORotate(EffectTransformAnimationType.To, 
-                        EffectTransformAnimationType.EffectCurve.keys[^1].time).SetEase(EffectTransformAnimationType.EffectCurve);
+                        duration).SetEase(EffectTransformAnimationType.EffectCurve);
                     break;
                 case AnimationTypes.Scale:
                     EffectTransformAnimationType.TweenTransform.DOScale(EffectTransformAnimationType.To, 
-                        EffectTransformAnimationType.EffectCurve.keys[^1].time).SetEase(EffectTransformAnimationType.EffectCurve);
+                        duration).SetEase(EffectTransformAnimationType.EffectCurve);
                     break;
-                default:
-                    return;
+                case AnimationTypes.None:
+                    break;
             }
+            return 0f;
         }
     }
 }

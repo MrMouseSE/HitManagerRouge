@@ -92,6 +92,13 @@ namespace Editor.Utils
             {
                 container.UnitGameObject = container.gameObject;
             }
+            container.UnitCollider = (Collider)EditorGUILayout.ObjectField("Unit Collider", container.UnitCollider, typeof(Collider), true);
+            if (container.UnitCollider == null)
+            {
+                Collider collider = container.gameObject.GetComponentInChildren<Collider>();
+                if (collider.gameObject.name == "UnitCollider") container.UnitCollider = collider;
+                if (collider == null) EditorGUILayout.HelpBox("Cant Find Unit Collider", MessageType.Error);
+            }
             
             serializedObject.Update();
             _reorderableList.DoLayoutList();

@@ -22,4 +22,5 @@ MonoBehaviour:
   UnitArmors:
   - Value: 0.1
     Type: 0
-  UnitSpeed: 5
+  UnitSpeed: 0
+  UnitBouncePower: 0

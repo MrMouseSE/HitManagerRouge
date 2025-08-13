@@ -1,4 +1,5 @@
 using System;
+using Core.GameplayControllers;
 using Core.Units.UnitsValues;
 using Core.Utils;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Core.Units
     {
         private UnitValuesContainer _unitValuesContainer;
         
-        public void SetUnitValues(UnitValuesContainer unitValuesContainer)
+        public void SetUnitValuesContainer(UnitValuesContainer unitValuesContainer)
         {
             _unitValuesContainer = unitValuesContainer;
         }
@@ -29,14 +30,7 @@ namespace Core.Units
 
         public void HitUnit(UnitDamage[] incomeDamages)
         {
-            float resultDamage = 0f;
-            foreach (UnitDamage incomeDamage in incomeDamages)
-            {
-                resultDamage += _unitValuesContainer.ReturnCalculatedIncomeDamage(incomeDamage);
-                
-            }
-            _unitValuesContainer.TryChangeCurrentHealthAndReturnIsAlive(-resultDamage);
-            _unitValuesContainer.Prefab.PlayEffect(PlayableUnitEffectTypes.Damage);
+            _unitValuesContainer.HitUnit(incomeDamages);
         }
 
         public void HealUnit(float heal)
@@ -50,9 +44,14 @@ namespace Core.Units
             _unitValuesContainer.SetUnitTarget(target);
         }
 
-        public bool TryToUpdateUnit(float deltaTime)
+        public UnitValuesContainer GetUnitValuesContainer()
         {
-            _unitValuesContainer.UpdateSystems(deltaTime);
+            return _unitValuesContainer;
+        }
+
+        public bool TryToUpdateUnit(UnitsController context, float deltaTime)
+        {
+            _unitValuesContainer.UpdateSystems(context, deltaTime);
             return _unitValuesContainer.TryChangeCurrentHealthAndReturnIsAlive(0);
         }
 

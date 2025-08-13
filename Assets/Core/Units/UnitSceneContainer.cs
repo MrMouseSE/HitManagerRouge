@@ -7,11 +7,16 @@ namespace Core.Units
     {
         public Transform UnitTransform;
         public GameObject UnitGameObject;
+        public Collider UnitCollider;
         public PlayableUnitEffect[] UnitEffects;
+
+        [Space] public string Value;
 
         public void PlayEffect(PlayableUnitEffectTypes effectType)
         {
-            UnitEffects[(int)effectType].Play();
+            var effect = UnitEffects[(int)effectType];
+            float effectTime = effect.PlayAndReturnDuration();
+            if (effectType == PlayableUnitEffectTypes.Death) Destroy(UnitGameObject, effectTime);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace Core.Units
         public List<UnitDamage> UnitDamages;
         public List<UnitDamage> UnitArmors;
         public float UnitSpeed;
+        public float UnitBouncePower;
     }
 }

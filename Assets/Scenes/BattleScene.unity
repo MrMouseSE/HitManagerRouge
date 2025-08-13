@@ -697,13 +697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec11ae44baca4c0b898130217e5fe70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnRadius: 20
-  SpawnCooldown: 5
-  EnemyDescription: {fileID: 11400000, guid: dae845144f1899b43a2bcd77b50b4de6, type: 2}
-  PlayerDescription: {fileID: 11400000, guid: 98deb766bc86ef241bbe2de6fd2650d9, type: 2}
   EntryPoint: {fileID: 1642473362}
-  EnemyUnitsHolder: {fileID: 0}
-  PlayerUnitsHolder: {fileID: 0}
+  EnemyUnitsHolder: {fileID: 1391934492}
+  PlayerUnitsHolder: {fileID: 1306641431}
+  PlayerUnitDescription: {fileID: 11400000, guid: 98deb766bc86ef241bbe2de6fd2650d9, type: 2}
 --- !u!114 &1642473362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70823831bb5f4ac4bc453d316b620aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentDifficulty: 0
+  EnemiesSpawnDescription: {fileID: 11400000, guid: 3f2a1f884f9941e47ad87f1be76b473f, type: 2}
 --- !u!1 &2118985019
 GameObject:
   m_ObjectHideFlags: 0

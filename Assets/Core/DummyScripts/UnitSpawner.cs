@@ -1,39 +1,40 @@
 using Core.Units;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Core.DummyScripts
 {
     public class UnitSpawner : MonoBehaviour
     {
-        public float SpawnRadius;
-        public float SpawnCooldown;
-        public UnitSettingsDescription EnemyDescription;
-        public UnitSettingsDescription PlayerDescription;
         public DummyEntryPoint EntryPoint;
         public Transform EnemyUnitsHolder;
         public Transform PlayerUnitsHolder;
-        
-        private float _currentCooldown;
+        public UnitSettingsDescription PlayerUnitDescription;
 
         private void Start()
         {
             UnitsStaticFactory.EnemySceneContainer = EnemyUnitsHolder;
             UnitsStaticFactory.PlayerSceneContainer = PlayerUnitsHolder;
-            _currentCooldown = SpawnCooldown;
+            CreatePlayerUnits();
         }
 
-        private void Update()
+        private void CreatePlayerUnits()
         {
-            _currentCooldown -= Time.deltaTime;
-            if (_currentCooldown > 0f) return;
-            Vector3 spawnPosition = Random.onUnitSphere * SpawnRadius;
-            spawnPosition.y = 0f;
+            Vector3[] spawnPositions = new Vector3[3]
+            {
+                new (0, 0, 0),
+                new (2, 0, 0),
+                new (0, 0, 2),
+            };
+            foreach (var spawnPosition in spawnPositions)
+            {
+                SpawnPlayerUnits(PlayerUnitDescription, spawnPosition);
+            }
+        }
 
-            bool isEnemy = Random.value < 0.8f;
-            var currentDescription = isEnemy? EnemyDescription : PlayerDescription;
-            EntryPoint.SpawnNewUnit(currentDescription, spawnPosition, isEnemy);
-            _currentCooldown = SpawnCooldown;
+        private void SpawnPlayerUnits(UnitSettingsDescription playerDescription, Vector3 spawnPoint)
+        {
+            EntryPoint.SpawnNewUnit(playerDescription, spawnPoint, false);
+         
         }
     }
 }

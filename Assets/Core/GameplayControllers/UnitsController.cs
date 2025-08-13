@@ -17,16 +17,16 @@ namespace Core.GameplayControllers
             else _playerUnits.Add(playableUnit);
         }
 
-        public void UpdateController(float deltaTime)
+        public void UpdateController(GameplayControllersHandler context, float deltaTime)
         {
             foreach (var enemyUnit in _enemyUnits)
             {
-                if (enemyUnit.TryToUpdateUnit(deltaTime)) _unitsToRemove.Add(enemyUnit);
+                if (!enemyUnit.TryToUpdateUnit(this, deltaTime)) _unitsToRemove.Add(enemyUnit);
             }
 
             foreach (var playerUnit in _playerUnits)
             {
-                if (playerUnit.TryToUpdateUnit(deltaTime)) _unitsToRemove.Add(playerUnit);
+                if (!playerUnit.TryToUpdateUnit(this, deltaTime)) _unitsToRemove.Add(playerUnit);
             }
 
             foreach (var playableUnit in _unitsToRemove)
@@ -36,6 +36,11 @@ namespace Core.GameplayControllers
             }
 
             DestroyUnits();
+        }
+
+        public List<IPlayableUnit> GetUnitsList(bool isEnemyList)
+        {
+            return isEnemyList ? _enemyUnits : _playerUnits;
         }
 
         private void DestroyUnits()
