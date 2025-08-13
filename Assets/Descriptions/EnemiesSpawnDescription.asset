@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caba529a20e94b179c5c272067208a4c, type: 3}
+  m_Name: EnemiesSpawnDescription
+  m_EditorClassIdentifier: 
+  EnemiesDifficultyParams:
+  - Difficulty: 0
+    Enemies:
+    - Cooldown: 5
+      SpawnRadius: 20
+      MaximumCount: 20
+      UnitSettings: {fileID: 11400000, guid: dae845144f1899b43a2bcd77b50b4de6, type: 2}
+      CurrentCooldown: 0
+      CurrentCount: 0
