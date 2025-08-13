@@ -15,10 +15,11 @@ namespace Core.DummyScripts
         private void Awake()
         {
             
-            IGameplayController[] gameplayControllers = new IGameplayController[2]
+            IGameplayController[] gameplayControllers = new IGameplayController[3]
             {
                 new UnitsController(),
-                new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty))
+                new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty)),
+                new PlayerActionsController()
             };
             _gameplayControllersHandler = new GameplayControllersHandler(gameplayControllers);
         }

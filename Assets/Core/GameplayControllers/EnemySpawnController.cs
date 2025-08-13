@@ -23,7 +23,7 @@ namespace Core.GameplayControllers
                 enemySpawnSettingHandler.CurrentCooldown -= deltaTime;
                 if (enemySpawnSettingHandler.CurrentCooldown < 0 && enemySpawnSettingHandler.CurrentCount < enemySpawnSettingHandler.MaximumCount)
                 {
-                    var unitsController = context.GetUnitsController(typeof(UnitsController));
+                    var unitsController = (UnitsController)context.GetGameplayControllerByType(typeof(UnitsController));
                     Vector3 spawnPosition = Random.onUnitSphere * enemySpawnSettingHandler.SpawnRadius;
                     spawnPosition.y = 0f;
                     unitsController.CreatePlayableUnit(enemySpawnSettingHandler.UnitSettings,spawnPosition, true);
