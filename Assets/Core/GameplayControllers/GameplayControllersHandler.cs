@@ -28,15 +28,5 @@ namespace Core.GameplayControllers
         {
             return _gameplayControllers[type];
         }
-
-        public UnitsController GetUnitsController(Type type)
-        {
-            return _gameplayControllers[type] as UnitsController;
-        }
-
-        public PlayerActionsController GetPlayerActionsController(Type type)
-        {
-            return _gameplayControllers[type] as PlayerActionsController;
-        }
     }
 }

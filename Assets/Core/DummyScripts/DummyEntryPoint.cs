@@ -31,8 +31,8 @@ namespace Core.DummyScripts
 
         public void SpawnNewUnit(UnitSettingsDescription description, Vector3 position, bool isEnemy)
         {
-            _gameplayControllersHandler.GetUnitsController(
-                typeof(UnitsController)).CreatePlayableUnit(description, position, isEnemy);
+            UnitsController unitsController = (UnitsController)_gameplayControllersHandler.GetGameplayControllerByType(typeof(UnitsController));
+            unitsController.CreatePlayableUnit(description, position, isEnemy);
         }
     }
 }
