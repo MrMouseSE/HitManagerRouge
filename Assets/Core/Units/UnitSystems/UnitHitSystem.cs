@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core.GameplayControllers;
+using UnityEngine;
 
 namespace Core.Units.UnitSystems
 {
@@ -12,9 +13,11 @@ namespace Core.Units.UnitSystems
             {
                 if (targetUnit.GetUnitValuesContainer().Prefab.UnitCollider.bounds.Intersects(unitValuesContainer.Prefab.UnitCollider.bounds))
                 {
-                    targetUnit.HitUnit(unitValuesContainer.ReturnCalculatedOutcomeDamage());
-                    unitValuesContainer.UnitCurrentSpeed -=
-                        unitValuesContainer.UnitMaxSpeed * unitValuesContainer.UnitBouncePower;
+                    var damage = unitValuesContainer.ReturnCalculatedOutcomeDamage();
+                    Debug.LogWarning(unitValuesContainer.Prefab.UnitGameObject.name + $" dealt ${damage} damage to " 
+                        + targetUnit.GetUnitValuesContainer().Prefab.UnitGameObject.name);
+                    targetUnit.HitUnit(damage);
+                    unitValuesContainer.UnitCurrentSpeed -= unitValuesContainer.UnitMaxSpeed * unitValuesContainer.UnitBouncePower;
                 }
             }
         }

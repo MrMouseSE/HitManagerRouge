@@ -467,8 +467,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830721156}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.55993086, y: 0.0037232258, z: -0.0025189982, w: 0.8285272}
+  m_LocalPosition: {x: -1.0229688, y: 10.257024, z: -4.832368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -713,6 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70823831bb5f4ac4bc453d316b620aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BattleSceneCamera: {fileID: 330585545}
   CurrentDifficulty: 0
   EnemiesSpawnDescription: {fileID: 11400000, guid: 3f2a1f884f9941e47ad87f1be76b473f, type: 2}
 --- !u!1 &2118985019

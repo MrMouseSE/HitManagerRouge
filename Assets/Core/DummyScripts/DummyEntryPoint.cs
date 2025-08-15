@@ -1,5 +1,6 @@
 using Core.EnemiesScripts;
 using Core.GameplayControllers;
+using Core.PlayerActionsScripts.PlayerInputLibrary;
 using Core.Units;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Core.DummyScripts
 {
     public class DummyEntryPoint : MonoBehaviour
     {
+        public Camera BattleSceneCamera;
         public int CurrentDifficulty;
         public EnemiesSpawnDescription EnemiesSpawnDescription;
         
@@ -14,7 +16,7 @@ namespace Core.DummyScripts
         
         private void Awake()
         {
-            
+            PlayerInputHandler.RayCastCamera = BattleSceneCamera;
             IGameplayController[] gameplayControllers = new IGameplayController[3]
             {
                 new UnitsController(),
