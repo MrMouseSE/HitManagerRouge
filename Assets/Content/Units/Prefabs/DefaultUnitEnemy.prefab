@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5488380373528133041, guid: 9192046a115d32240a936f05076ac1ec, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5518821039896264225, guid: 9192046a115d32240a936f05076ac1ec, type: 3}
       propertyPath: m_Name
       value: DefaultUnitEnemy

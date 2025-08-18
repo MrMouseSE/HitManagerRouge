@@ -23,14 +23,14 @@ namespace Core.PlayerActionsScripts.PlayerInputLibrary
 
             foreach (var playerUnit in unitsController.GetUnitsList(false))
             {
-                if (!playerUnit.GetUnitValuesContainer().Prefab.UnitCollider.bounds.Contains(result.TapPositions[0])) continue;
+                if (!playerUnit.GetUnitValuesContainer().Prefab.UnitSphereCollider.bounds.Contains(result.TapPositions[0])) continue;
                 result.IsTappedThisFrame = true;
                 result.TappedUnits.Add(playerUnit);
             }
 
             foreach (var enemyUnit in unitsController.GetUnitsList(true))
             {
-                if (!enemyUnit.GetUnitValuesContainer().Prefab.UnitCollider.bounds.Contains(result.TapPositions[0])) continue;
+                if (!enemyUnit.GetUnitValuesContainer().Prefab.UnitSphereCollider.bounds.Contains(result.TapPositions[0])) continue;
                 result.IsTappedThisFrame = true;
                 result.TappedUnits.Add(enemyUnit);
             }

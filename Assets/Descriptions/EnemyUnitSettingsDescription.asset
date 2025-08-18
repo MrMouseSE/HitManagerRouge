@@ -15,12 +15,11 @@ MonoBehaviour:
   UnitPrefab: {fileID: 5227263593221770911, guid: b03e8d51db92fb54cbf524b80ad6e004, type: 3}
   UnitType: 0
   UnitHealth: 10
-  UnitRadius: 1
   UnitDamages:
-  - Value: 5
+  - Value: 8
     Type: 0
   UnitArmors:
   - Value: 0.1
     Type: 0
   UnitSpeed: 5
-  UnitBouncePower: 1.3
+  UnitBouncePower: 2

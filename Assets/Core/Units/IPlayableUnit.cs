@@ -11,7 +11,6 @@ namespace Core.Units
         public bool IsPositionOverlapByUnit(Vector3 position, float radius);
         public void HitUnit(UnitDamage[] incomeDamages);
         public void HealUnit(float heal);
-        public void SetTarget(IPlayableUnit target);
         public bool TryToUpdateUnit(UnitsController context, float deltaTime);
         public UnitValuesContainer GetUnitValuesContainer();
         public void DestroyUnit();

@@ -7,10 +7,8 @@ namespace Core.Units
     {
         public Transform UnitTransform;
         public GameObject UnitGameObject;
-        public Collider UnitCollider;
+        public SphereCollider UnitSphereCollider;
         public PlayableUnitEffect[] UnitEffects;
-
-        [Space] public string Value;
 
         public void PlayEffect(PlayableUnitEffectTypes effectType)
         {

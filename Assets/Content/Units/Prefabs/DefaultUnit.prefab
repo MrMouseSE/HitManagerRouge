@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 45631235083340519}
-  - component: {fileID: 5196725339532481150}
+  - component: {fileID: 5488380373528133041}
   m_Layer: 0
   m_Name: UnitCollider
   m_TagString: Untagged
@@ -32,8 +32,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8343492656786265035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5196725339532481150
-BoxCollider:
+--- !u!135 &5488380373528133041
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -51,7 +51,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.65
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1297951035675736855
 GameObject:
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitTransform: {fileID: 8343492656786265035}
   UnitGameObject: {fileID: 5518821039896264225}
-  UnitCollider: {fileID: 5196725339532481150}
+  UnitSphereCollider: {fileID: 5488380373528133041}
   UnitEffects:
   - Type: 0
     HasEffectAnimation: 0

@@ -92,11 +92,11 @@ namespace Editor.Utils
             {
                 container.UnitGameObject = container.gameObject;
             }
-            container.UnitCollider = (Collider)EditorGUILayout.ObjectField("Unit Collider", container.UnitCollider, typeof(Collider), true);
-            if (container.UnitCollider == null)
+            container.UnitSphereCollider = (SphereCollider)EditorGUILayout.ObjectField("Unit Collider", container.UnitSphereCollider, typeof(Collider), true);
+            if (container.UnitSphereCollider == null)
             {
-                Collider collider = container.gameObject.GetComponentInChildren<Collider>();
-                if (collider.gameObject.name == "UnitCollider") container.UnitCollider = collider;
+                SphereCollider collider = container.gameObject.GetComponentInChildren<SphereCollider>();
+                if (collider.gameObject.name == "UnitCollider") container.UnitSphereCollider = collider;
                 if (collider == null) EditorGUILayout.HelpBox("Cant Find Unit Collider", MessageType.Error);
             }
             

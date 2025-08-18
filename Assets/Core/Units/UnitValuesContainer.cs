@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.GameplayControllers;
 using Core.Units.UnitsValues;
@@ -20,21 +21,24 @@ namespace Core.Units
         public float UnitBouncePower;
 
         public UnitSceneContainer Prefab;
-        public Vector3 UnitPosition;
+        public Vector3 UnitCurrentPosition;
         public float UnitRadius;
         public float UnitMaxSpeed;
         public bool IsTargetLocked;
         public IPlayableUnit Target;
-        
-        public IUnitSystem[] UnitSystems;
+        public readonly List<UnitValuesContainer> Hunters = new List<UnitValuesContainer>();
 
         public float UnitCurrentSpeed;
+        public Vector3 UnitCurrentDirection;
+        
+        private readonly IUnitSystem[] _unitSystems;
+        private Vector3 _previousPosition;
 
         public UnitValuesContainer(UnitSettingsDescription unitSettingsDescription, UnitSceneContainer prefab, 
             IUnitSystem[] unitSystems, bool isEnemy)
         {
             Prefab = prefab;
-            UnitPosition = Prefab.UnitTransform.position;
+            UnitCurrentPosition = Prefab.UnitTransform.position;
             MaximumHealth = unitSettingsDescription.UnitHealth;
             CurrentHealth = MaximumHealth;
             CurrentDamageMultiplier = 1;
@@ -42,24 +46,31 @@ namespace Core.Units
             CurrentDamages = unitSettingsDescription.UnitDamages.OrderBy(x=>(int)x.Type).ToArray();
             CurrentArmor = unitSettingsDescription.UnitArmors.OrderBy(x => (int)x.Type).ToArray();
             IsEnemy = isEnemy;
-            UnitRadius = unitSettingsDescription.UnitRadius;
+            UnitRadius = Prefab.UnitSphereCollider.radius;
             UnitMaxSpeed = unitSettingsDescription.UnitSpeed;
             UnitBouncePower = unitSettingsDescription.UnitBouncePower;
-            UnitSystems = unitSystems;
+            _unitSystems = unitSystems;
         }
 
         public void UpdateSystems(UnitsController context, float deltaTime)
         {
-            foreach (var unitSystem in UnitSystems)
+            foreach (var unitSystem in _unitSystems)
             {
                 unitSystem.UpdateUnit(context, deltaTime,this);
             }
         }
 
-        public void SetUnitTarget(IPlayableUnit target)
+        public void AddHunter(UnitValuesContainer unitValuesContainer)
+        {
+            Hunters.Add(unitValuesContainer);
+        }
+
+        public void SetUnitTarget(IPlayableUnit target, bool isTargetLocked)
         {
             Target = target;
-            IsTargetLocked = true;
+            IsTargetLocked = isTargetLocked;
+            if (!isTargetLocked) return;
+            Target.GetUnitValuesContainer().AddHunter(this);
         }
 
         public void SetCurrentArmorMultiplier(float armorMultiplier)
@@ -77,8 +88,13 @@ namespace Core.Units
             float tempHealth = CurrentHealth + deltaHealth;
             if (tempHealth > MaximumHealth) CurrentHealth = MaximumHealth;
             else CurrentHealth = tempHealth;
-            Prefab.Value = CurrentHealth.ToString();
             return CurrentHealth > 0f;
+        }
+
+        public void HealUnit(float healAmount)
+        {
+            TryChangeCurrentHealthAndReturnIsAlive(healAmount);
+            Prefab.PlayEffect(PlayableUnitEffectTypes.Heal);
         }
 
         public UnitDamage[] ReturnCalculatedOutcomeDamage()
@@ -108,14 +124,31 @@ namespace Core.Units
             return (1 - CurrentArmor[(int)damage.Type].Value) * CurrentArmorMultiplier * damage.Value;
         }
 
-        public void UpdatePosition(Vector3 offset)
+        public void UpdateUnitMoveDirection(Vector3 direction)
         {
-            UnitPosition += offset;
-            Prefab.UnitTransform.position = UnitPosition;
+            UnitCurrentDirection = direction;
+        }
+        
+        public void MoveToPreviousPosition()
+        {
+            UnitCurrentPosition = _previousPosition;
+            Prefab.UnitTransform.position = UnitCurrentPosition;
+        }
+        
+        public void MoveUnitByVector(Vector3 offset)
+        {
+            _previousPosition = UnitCurrentPosition;
+            UnitCurrentPosition += offset;
+            Prefab.UnitTransform.position = UnitCurrentPosition;
         }
 
         public void Destroy()
         {
+            foreach (UnitValuesContainer hunterValueContainer in Hunters)
+            {
+                hunterValueContainer.SetUnitTarget(null, false);
+            }
+            Hunters.Clear();
             Prefab.PlayEffect(PlayableUnitEffectTypes.Death);
             GC.SuppressFinalize(this);
         }

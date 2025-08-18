@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.GameplayControllers;
-using UnityEngine;
 
 namespace Core.Units.UnitSystems
 {
@@ -11,15 +10,21 @@ namespace Core.Units.UnitSystems
             List<IPlayableUnit> targetUnits = context.GetUnitsList(!unitValuesContainer.IsEnemy);
             foreach (var targetUnit in targetUnits)
             {
-                if (targetUnit.GetUnitValuesContainer().Prefab.UnitCollider.bounds.Intersects(unitValuesContainer.Prefab.UnitCollider.bounds))
+                if (CheckIntersectByRadius(unitValuesContainer, targetUnit.GetUnitValuesContainer()))
                 {
                     var damage = unitValuesContainer.ReturnCalculatedOutcomeDamage();
-                    Debug.LogWarning(unitValuesContainer.Prefab.UnitGameObject.name + $" dealt ${damage} damage to " 
-                        + targetUnit.GetUnitValuesContainer().Prefab.UnitGameObject.name);
                     targetUnit.HitUnit(damage);
+                    unitValuesContainer.MoveToPreviousPosition();
                     unitValuesContainer.UnitCurrentSpeed -= unitValuesContainer.UnitMaxSpeed * unitValuesContainer.UnitBouncePower;
                 }
             }
+        }
+
+        private bool CheckIntersectByRadius(UnitValuesContainer source, UnitValuesContainer target)
+        {
+            float squareDistance = (source.UnitCurrentPosition - target.UnitCurrentPosition).sqrMagnitude;
+            float summRadius = source.UnitRadius + target.UnitRadius;
+            return squareDistance <= summRadius * summRadius;
         }
     }
 }
