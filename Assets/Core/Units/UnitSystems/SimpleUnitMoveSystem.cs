@@ -12,7 +12,7 @@ namespace Core.Units.UnitSystems
                 Mathf.Lerp(unitValuesContainer.UnitCurrentSpeed, unitValuesContainer.UnitMaxSpeed, deltaTime);
             Vector3 targetDirection = (unitValuesContainer.Target.GetPosition() - unitValuesContainer.UnitCurrentPosition).normalized;
             unitValuesContainer.UpdateUnitMoveDirection(targetDirection);
-            unitValuesContainer.MoveUnitByVector(targetDirection * (unitValuesContainer.UnitCurrentSpeed * deltaTime));
+            unitValuesContainer.MoveUnitByVector(unitValuesContainer.UnitCurrentDirection * (unitValuesContainer.UnitCurrentSpeed * deltaTime));
         }
     }
 }

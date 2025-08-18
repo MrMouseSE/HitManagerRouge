@@ -29,16 +29,17 @@ namespace Core.Units
         public readonly List<UnitValuesContainer> Hunters = new List<UnitValuesContainer>();
 
         public float UnitCurrentSpeed;
-        public Vector3 UnitCurrentDirection;
+        public Vector3 UnitCurrentDirection = Vector3.zero;
         
         private readonly IUnitSystem[] _unitSystems;
         private Vector3 _previousPosition;
 
-        public UnitValuesContainer(UnitSettingsDescription unitSettingsDescription, UnitSceneContainer prefab, 
+        public UnitValuesContainer(UnitSettingsDescription unitSettingsDescription, Vector3 startPosition, UnitSceneContainer prefab, 
             IUnitSystem[] unitSystems, bool isEnemy)
         {
             Prefab = prefab;
-            UnitCurrentPosition = Prefab.UnitTransform.position;
+            UnitCurrentPosition = startPosition;
+            _previousPosition = UnitCurrentPosition;
             MaximumHealth = unitSettingsDescription.UnitHealth;
             CurrentHealth = MaximumHealth;
             CurrentDamageMultiplier = 1;
@@ -126,7 +127,7 @@ namespace Core.Units
 
         public void UpdateUnitMoveDirection(Vector3 direction)
         {
-            UnitCurrentDirection = direction;
+            UnitCurrentDirection = Mathf.Approximately(UnitMaxSpeed, 0f) ? direction : Vector3.Lerp(direction, UnitCurrentDirection, -UnitCurrentSpeed/UnitMaxSpeed);
         }
         
         public void MoveToPreviousPosition()
