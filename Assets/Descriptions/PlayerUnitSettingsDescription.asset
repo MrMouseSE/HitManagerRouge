@@ -15,7 +15,6 @@ MonoBehaviour:
   UnitPrefab: {fileID: 7164311894322860815, guid: 9192046a115d32240a936f05076ac1ec, type: 3}
   UnitType: 0
   UnitHealth: 10
-  UnitRadius: 1
   UnitDamages:
   - Value: 5
     Type: 0

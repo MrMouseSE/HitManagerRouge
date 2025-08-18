@@ -24,9 +24,9 @@ namespace Core.GameplayControllers
             }
         }
 
-        public UnitsController GetUnitsController(Type type)
+        public IGameplayController GetGameplayControllerByType(Type type)
         {
-            return _gameplayControllers[type] as UnitsController;
+            return _gameplayControllers[type];
         }
     }
 }

@@ -1,5 +1,6 @@
 using Core.EnemiesScripts;
 using Core.GameplayControllers;
+using Core.PlayerActionsScripts.PlayerInputLibrary;
 using Core.Units;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Core.DummyScripts
 {
     public class DummyEntryPoint : MonoBehaviour
     {
+        public Camera BattleSceneCamera;
         public int CurrentDifficulty;
         public EnemiesSpawnDescription EnemiesSpawnDescription;
         
@@ -14,11 +16,12 @@ namespace Core.DummyScripts
         
         private void Awake()
         {
-            
-            IGameplayController[] gameplayControllers = new IGameplayController[2]
+            PlayerInputHandler.RayCastCamera = BattleSceneCamera;
+            IGameplayController[] gameplayControllers = new IGameplayController[3]
             {
                 new UnitsController(),
-                new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty))
+                new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty)),
+                new PlayerActionsController()
             };
             _gameplayControllersHandler = new GameplayControllersHandler(gameplayControllers);
         }
@@ -30,8 +33,8 @@ namespace Core.DummyScripts
 
         public void SpawnNewUnit(UnitSettingsDescription description, Vector3 position, bool isEnemy)
         {
-            _gameplayControllersHandler.GetUnitsController(
-                typeof(UnitsController)).CreatePlayableUnit(description, position, isEnemy);
+            UnitsController unitsController = (UnitsController)_gameplayControllersHandler.GetGameplayControllerByType(typeof(UnitsController));
+            unitsController.CreatePlayableUnit(description, position, isEnemy);
         }
     }
 }

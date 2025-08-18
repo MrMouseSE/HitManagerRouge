@@ -12,8 +12,7 @@ namespace Core.Units.UnitSystems
             if (unitValuesContainer.IsTargetLocked) return;
             List<IPlayableUnit> targetsList = context.GetUnitsList(!unitValuesContainer.IsEnemy);
             if (targetsList.Count < 1) return;
-            unitValuesContainer.Target = targetsList[Random.Range(0, targetsList.Count)];
-            unitValuesContainer.IsTargetLocked = true;
+            unitValuesContainer.SetUnitTarget(targetsList[Random.Range(0, targetsList.Count)], true);
         }
     }
 }

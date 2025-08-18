@@ -35,7 +35,7 @@ namespace Core.Units
             unitSystems[0] = new UnitTargetingSystem();
             unitSystems[1] = new UnitHitSystem();
             unitSystems[2] = new SimpleUnitMoveSystem();
-            UnitValuesContainer valuesContainer = new UnitValuesContainer(description, sceneContainer, unitSystems, isEnemy);
+            UnitValuesContainer valuesContainer = new UnitValuesContainer(description, position, sceneContainer, unitSystems, isEnemy);
             playableUnit.SetUnitValuesContainer(valuesContainer);
             _spawnedUnits++;
             return playableUnit;

@@ -17,12 +17,12 @@ namespace Core.Units
 
         public Vector3 GetPosition()
         {
-            return _unitValuesContainer.UnitPosition;
+            return _unitValuesContainer.UnitCurrentPosition;
         }
 
         public bool IsPositionOverlapByUnit(Vector3 position, float radius)
         {
-             float lenghtSquared = (position - _unitValuesContainer.UnitPosition).magnitude;
+             float lenghtSquared = (position - _unitValuesContainer.UnitCurrentPosition).magnitude;
 
              bool overlap = (lenghtSquared < radius || lenghtSquared < _unitValuesContainer.UnitRadius);
              return overlap;
@@ -35,13 +35,13 @@ namespace Core.Units
 
         public void HealUnit(float heal)
         {
-            _unitValuesContainer.TryChangeCurrentHealthAndReturnIsAlive(heal);
+            _unitValuesContainer.HealUnit(heal);
             _unitValuesContainer.Prefab.PlayEffect(PlayableUnitEffectTypes.Heal);
         }
 
         public void SetTarget(IPlayableUnit target)
         {
-            _unitValuesContainer.SetUnitTarget(target);
+            _unitValuesContainer.SetUnitTarget(target, true);
         }
 
         public UnitValuesContainer GetUnitValuesContainer()

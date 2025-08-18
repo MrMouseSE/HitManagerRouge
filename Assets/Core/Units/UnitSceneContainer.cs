@@ -7,10 +7,17 @@ namespace Core.Units
     {
         public Transform UnitTransform;
         public GameObject UnitGameObject;
-        public Collider UnitCollider;
+        public SphereCollider UnitSphereCollider;
         public PlayableUnitEffect[] UnitEffects;
 
-        [Space] public string Value;
+        public SpriteRenderer UnitSpriteRenderer;
+        public Color NoHP;
+        public Color FullHp;
+
+        public void UpdateColorByHp(float hp)
+        {
+            UnitSpriteRenderer.color = Color.Lerp(NoHP, FullHp, hp);
+        }
 
         public void PlayEffect(PlayableUnitEffectTypes effectType)
         {

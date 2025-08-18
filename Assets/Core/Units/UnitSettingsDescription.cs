@@ -10,7 +10,6 @@ namespace Core.Units
         public UnitSceneContainer UnitPrefab;
         public UnitTypes UnitType;
         public float UnitHealth;
-        public float UnitRadius;
         public List<UnitDamage> UnitDamages;
         public List<UnitDamage> UnitArmors;
         public float UnitSpeed;

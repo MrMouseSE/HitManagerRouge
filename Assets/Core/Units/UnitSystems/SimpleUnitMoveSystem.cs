@@ -10,8 +10,9 @@ namespace Core.Units.UnitSystems
             if (!unitValuesContainer.IsTargetLocked) return;
             unitValuesContainer.UnitCurrentSpeed = 
                 Mathf.Lerp(unitValuesContainer.UnitCurrentSpeed, unitValuesContainer.UnitMaxSpeed, deltaTime);
-            Vector3 targetDirection = unitValuesContainer.Target.GetPosition() - unitValuesContainer.UnitPosition;
-            unitValuesContainer.UpdatePosition(targetDirection.normalized * (unitValuesContainer.UnitCurrentSpeed * deltaTime));
+            Vector3 targetDirection = (unitValuesContainer.Target.GetPosition() - unitValuesContainer.UnitCurrentPosition).normalized;
+            unitValuesContainer.UpdateUnitMoveDirection(targetDirection);
+            unitValuesContainer.MoveUnitByVector(unitValuesContainer.UnitCurrentDirection * (unitValuesContainer.UnitCurrentSpeed * deltaTime));
         }
     }
 }
