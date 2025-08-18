@@ -5,7 +5,7 @@ namespace Core.PlayerActionsScripts.PlayerSkills
 {
     public class HealUnitPlayerSkill : IPlayerSkill
     {
-        private float healAmount;
+        private float healAmount = 10f;
         
         public void UseSkill(UnitsController unitsController, GestureResult gestureResult, float deltaTime)
         {

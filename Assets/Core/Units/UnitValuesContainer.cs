@@ -86,6 +86,7 @@ namespace Core.Units
 
         public bool TryChangeCurrentHealthAndReturnIsAlive(float deltaHealth)
         {
+            Prefab.UpdateColorByHp(CurrentHealth/MaximumHealth);
             float tempHealth = CurrentHealth + deltaHealth;
             if (tempHealth > MaximumHealth) CurrentHealth = MaximumHealth;
             else CurrentHealth = tempHealth;

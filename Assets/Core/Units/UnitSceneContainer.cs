@@ -10,6 +10,15 @@ namespace Core.Units
         public SphereCollider UnitSphereCollider;
         public PlayableUnitEffect[] UnitEffects;
 
+        public SpriteRenderer UnitSpriteRenderer;
+        public Color NoHP;
+        public Color FullHp;
+
+        public void UpdateColorByHp(float hp)
+        {
+            UnitSpriteRenderer.color = Color.Lerp(NoHP, FullHp, hp);
+        }
+
         public void PlayEffect(PlayableUnitEffectTypes effectType)
         {
             var effect = UnitEffects[(int)effectType];
