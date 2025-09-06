@@ -5,14 +5,18 @@ namespace Core.PlayerActionsScripts
 {
     public static class PlayerActionsStaticFactory
     {
-        public static IPlayerAction CreatePlayerAction()
+        public static IPlayerAction CreatePlayerActions(PlayerSkillsDataHolder playerSkillsData)
         {
-            return CreateTapPlayerAction();
+            return CreateTapPlayerAction(playerSkillsData);
         }
 
-        private static IPlayerAction CreateTapPlayerAction()
+        private static IPlayerAction CreateTapPlayerAction(PlayerSkillsDataHolder playerSkillsData)
         {
-            List<IPlayerSkill> playerSkills = PlayerSkillsStaticFactory.CreatePlayerSkills();
+            List<IPlayerSkill> playerSkills = new List<IPlayerSkill>();
+            foreach (var skillData in playerSkillsData.PlayerCurrentSkills)
+            {
+                playerSkills.Add(PlayerSkillsStaticFactory.CreatePlayerSkills(skillData));
+            }
             TapPlayerAction tapPlayerAction = new TapPlayerAction(playerSkills);
             return tapPlayerAction;
         }

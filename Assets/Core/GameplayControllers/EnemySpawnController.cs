@@ -6,7 +6,7 @@ namespace Core.GameplayControllers
 {
     public class EnemySpawnController : IGameplayController
     {
-        private List<EnemySpawnSettingHandler> _enemySpawnSettingHandlers = new ();
+        private readonly List<EnemySpawnSettingHandler> _enemySpawnSettingHandlers = new ();
 
         public EnemySpawnController(EnemiesDifficultyParams enemiesDifficultyParams)
         {

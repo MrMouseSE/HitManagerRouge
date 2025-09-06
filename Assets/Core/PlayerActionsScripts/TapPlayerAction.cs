@@ -23,10 +23,9 @@ namespace Core.PlayerActionsScripts
         {
             UnitsController unitsController = (UnitsController)context.GetGameplayControllerByType(typeof(UnitsController));
             GestureResult gestureResult = PlayerInputHandler.CheckForTapThisFrame(unitsController);
-            if (!gestureResult.IsTappedThisFrame) return;
             foreach (var actionSkill in _actionSkills)
             {
-                actionSkill.UseSkill(unitsController, gestureResult, deltaTime);
+                actionSkill.UpdateSkill(unitsController, gestureResult, deltaTime);
             }
         }
     }

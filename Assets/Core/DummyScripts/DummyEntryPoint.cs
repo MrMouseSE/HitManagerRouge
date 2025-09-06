@@ -1,6 +1,8 @@
 using Core.EnemiesScripts;
 using Core.GameplayControllers;
 using Core.PlayerActionsScripts.PlayerInputLibrary;
+using Core.PlayerActionsScripts.PlayerSkills;
+using Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions;
 using Core.Units;
 using UnityEngine;
 
@@ -11,11 +13,13 @@ namespace Core.DummyScripts
         public Camera BattleSceneCamera;
         public int CurrentDifficulty;
         public EnemiesSpawnDescription EnemiesSpawnDescription;
+        public PlayerSkillsDictionary PlayerSkillsDictionary;
         
         private GameplayControllersHandler _gameplayControllersHandler;
         
         private void Awake()
         {
+            PlayerSkillsStaticFactory.PlayerSkillsDictionary = PlayerSkillsDictionary;
             PlayerInputHandler.RayCastCamera = BattleSceneCamera;
             IGameplayController[] gameplayControllers = new IGameplayController[3]
             {
