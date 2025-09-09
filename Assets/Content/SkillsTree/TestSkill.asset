@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f56c4705c9847f79f680df417a7de75, type: 3}
+  m_Name: TestSkill
+  m_EditorClassIdentifier: Assembly-CSharp::Core.SkillsTree.SkillData
+  SkillID: 123
+  SkillName: Test
+  Description: 1312
+  SkillPointsCost: 5
+  UnlockRequirements:
+  - {fileID: 11400000, guid: 7a4973da24fedbd4ba1336602f7dfd9a, type: 2}
