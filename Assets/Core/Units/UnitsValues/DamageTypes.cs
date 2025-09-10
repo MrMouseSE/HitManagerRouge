@@ -6,5 +6,6 @@ namespace Core.Units.UnitsValues
         Fire = 1,
         Ice = 2,
         Chaos = 3,
+        Truth = 10
     }
 }

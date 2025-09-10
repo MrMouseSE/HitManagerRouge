@@ -17,6 +17,8 @@ namespace Core.PlayerActionsScripts.PlayerSkills
             {
                 case PlayerSkillsType.Heal:
                     return CreateUnitHealPlayerSkill(skillToCreate);
+                case PlayerSkillsType.Hit:
+                    return CreateUnitHitPlayerSkill(skillToCreate);
             }
             return null;
         }
@@ -26,6 +28,13 @@ namespace Core.PlayerActionsScripts.PlayerSkills
             HealUnitPlayerSkill healUnitPlayerSkill = new HealUnitPlayerSkill();
             healUnitPlayerSkill.SetSkillDescription(skillToCreate);
             return healUnitPlayerSkill;
+        }
+
+        private static IPlayerSkill CreateUnitHitPlayerSkill(PlayerSkillDescription skillToCreate)
+        {
+            HitUnitPlayerSkill hitUnitPlayerSkill = new HitUnitPlayerSkill();
+            hitUnitPlayerSkill.SetSkillDescription(skillToCreate);
+            return hitUnitPlayerSkill;
         }
     }
 }

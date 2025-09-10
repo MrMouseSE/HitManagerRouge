@@ -28,6 +28,11 @@ namespace Core.Units
              return overlap;
         }
 
+        public void HitUnit(float pureDamage)
+        {
+            _unitValuesContainer.TryChangeCurrentHealthAndReturnIsAlive(-pureDamage);
+        }
+
         public void HitUnit(UnitDamage[] incomeDamages)
         {
             _unitValuesContainer.HitUnit(incomeDamages);

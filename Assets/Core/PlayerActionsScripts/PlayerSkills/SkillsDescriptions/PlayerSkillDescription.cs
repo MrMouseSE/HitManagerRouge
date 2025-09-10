@@ -7,6 +7,7 @@ namespace Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions
     {
         public int SkillLevel;
         public float HealAmount;
+        public float HitAmount;
         public float Cooldown;
     }
 }
