@@ -10,17 +10,18 @@ namespace Core.GameplayControllers
         private PlayerSkillsDataHolder _playerSkillsData;
         private readonly List<IPlayerAction> _playerActions;
 
-        public PlayerActionsController()
+        public PlayerActionsController(PlayerSkillsDataHolder playerSkillsData)
         {
             //TODO: refactor save and load skills system
-            _playerSkillsData = PlayerSkillsDataSaveAndLoadHandler.GetSkillsData();
+            _playerSkillsData = playerSkillsData;
             _playerActions = new List<IPlayerAction> { PlayerActionsStaticFactory.CreatePlayerActions(_playerSkillsData) };
         }
 
-        public void UpdatePlayerSkillsData(PlayerSkillsType playerSkillsType, int currentLevel)
+        public void UpdatePlayerSkillsData(PlayerSkillsTypes playerSkillsTypes, int currentLevel)
         {
-            var skill = _playerSkillsData.PlayerCurrentSkills.Find(x=>x.SkillsType == playerSkillsType);
+            var skill = _playerSkillsData.PlayerCurrentSkills.Find(x=>x.SkillsTypes == playerSkillsTypes);
             skill.SkillCurrentLevel = currentLevel;
+            //TODO: refactor for update skill information
         }
         
         public void UpdateController(GameplayControllersHandler context, float deltaTime)

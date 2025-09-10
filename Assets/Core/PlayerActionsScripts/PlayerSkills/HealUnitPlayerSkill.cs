@@ -1,6 +1,7 @@
 using Core.GameplayControllers;
 using Core.PlayerActionsScripts.PlayerInputLibrary;
 using Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions;
+using Core.UserInterfaceViewScripts;
 
 namespace Core.PlayerActionsScripts.PlayerSkills
 {
@@ -14,9 +15,11 @@ namespace Core.PlayerActionsScripts.PlayerSkills
             _healSkillDescription = skillDescription;
         }
 
-        public void UpdateSkill(UnitsController unitsController, GestureResult gestureResult, float deltaTime)
+        public void UpdateSkill(UserInterfaceViewController interfaceViewController, UnitsController unitsController, 
+            GestureResult gestureResult, float deltaTime)
         {
             _currentCooldown -= deltaTime;
+            interfaceViewController.UpdateUserInterfaceViewCooldown(_currentCooldown, _healSkillDescription.PlayerSkillsType);
             if (_currentCooldown > 0) return;
 
             if (!gestureResult.IsTappedThisFrame || gestureResult.TappedUnits[0].GetUnitValuesContainer().IsEnemy) return;

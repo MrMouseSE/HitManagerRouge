@@ -4,6 +4,7 @@ using Core.PlayerActionsScripts.PlayerInputLibrary;
 using Core.PlayerActionsScripts.PlayerSkills;
 using Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions;
 using Core.Units;
+using Core.UserInterfaceViewScripts;
 using UnityEngine;
 
 namespace Core.DummyScripts
@@ -21,11 +22,14 @@ namespace Core.DummyScripts
         {
             PlayerSkillsStaticFactory.PlayerSkillsDictionary = PlayerSkillsDictionary;
             PlayerInputHandler.RayCastCamera = BattleSceneCamera;
-            IGameplayController[] gameplayControllers = new IGameplayController[3]
+            PlayerSkillsDataHolder playerSkillsDataHolder = PlayerSkillsDataSaveAndLoadHandler.GetSkillsData();
+            IGameplayController[] gameplayControllers = new IGameplayController[4]
             {
                 new UnitsController(),
                 new EnemySpawnController(EnemiesSpawnDescription.EnemiesDifficultyParams.Find(x=>x.Difficulty == CurrentDifficulty)),
-                new PlayerActionsController()
+                new UserInterfaceViewController(playerSkillsDataHolder),
+                new PlayerActionsController(playerSkillsDataHolder),
+                
             };
             _gameplayControllersHandler = new GameplayControllersHandler(gameplayControllers);
         }

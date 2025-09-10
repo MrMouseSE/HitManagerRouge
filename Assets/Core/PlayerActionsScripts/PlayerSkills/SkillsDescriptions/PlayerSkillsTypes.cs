@@ -1,6 +1,6 @@
 namespace Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions
 {
-    public enum PlayerSkillsType
+    public enum PlayerSkillsTypes
     {
         Heal,
         Hit,

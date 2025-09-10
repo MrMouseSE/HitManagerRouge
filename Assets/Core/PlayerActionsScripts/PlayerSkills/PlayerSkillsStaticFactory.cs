@@ -10,14 +10,14 @@ namespace Core.PlayerActionsScripts.PlayerSkills
         {
             var skillsList =
                 PlayerSkillsDictionary.SkillDescriptions.Find(x =>
-                    x.PlayerSkillsType == playerSkillCurrentData.SkillsType);
+                    x.PlayerSkillsType == playerSkillCurrentData.SkillsTypes);
             var skillToCreate = skillsList.PlayerSkillDescriptions.Find(x =>
                 x.SkillLevel == playerSkillCurrentData.SkillCurrentLevel);
             switch (skillsList.PlayerSkillsType)
             {
-                case PlayerSkillsType.Heal:
+                case PlayerSkillsTypes.Heal:
                     return CreateUnitHealPlayerSkill(skillToCreate);
-                case PlayerSkillsType.Hit:
+                case PlayerSkillsTypes.Hit:
                     return CreateUnitHitPlayerSkill(skillToCreate);
             }
             return null;

@@ -6,7 +6,7 @@ namespace Core.PlayerActionsScripts.PlayerSkills.SkillsDescriptions
     [Serializable]
     public class PlayerScriptTypeHolder
     {
-        public PlayerSkillsType PlayerSkillsType;
+        public PlayerSkillsTypes PlayerSkillsType;
         public List<PlayerSkillDescription> PlayerSkillDescriptions;
     }
 }
