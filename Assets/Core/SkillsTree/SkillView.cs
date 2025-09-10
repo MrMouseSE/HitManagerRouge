@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core.SkillsTree
@@ -6,7 +7,7 @@ namespace Core.SkillsTree
     {
         [SerializeField] private SkillData _skillData;
         [SerializeField] private LineRenderer _lineRenderer;
-        [SerializeField] private SkillView _nextSkill;
+        [SerializeField] private List<SkillView> _nextSkill;
         
         private SkillState _currentState;
         

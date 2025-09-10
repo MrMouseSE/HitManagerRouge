@@ -7,7 +7,7 @@ namespace Core.SkillsTree
     [CreateAssetMenu(fileName = "New Skill", menuName = "Skills/Skill Data")]
     public class SkillData : ScriptableObject
     {
-        public string SkillID;
+        public int SkillID;
         public string SkillName;
         public string Description;
         public int SkillPointsCost;

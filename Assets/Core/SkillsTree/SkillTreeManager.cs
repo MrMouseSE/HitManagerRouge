@@ -1,14 +1,17 @@
 using System.Collections.Generic;
+using Core.DummyScripts;
 using UnityEngine;
 
 namespace Core.SkillsTree
 {
     public class SkillTreeManager : MonoBehaviour 
     {
-        private UnitData _unitData;
-        private HashSet<string> _unlockedSkillIDs = new HashSet<string>();
+        public List<SkillView> SkillsView = new();
+        
+        private UnitData _unitData = new UnitData();
+        private HashSet<int> _unlockedSkillIDs = new();
 
-        public bool IsSkillUnlocked(string skillID)
+        public bool IsSkillUnlocked(int skillID)
         {
             return _unlockedSkillIDs.Contains(skillID);
         }

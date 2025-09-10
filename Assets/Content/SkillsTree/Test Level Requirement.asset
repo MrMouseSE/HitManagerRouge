@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b55f3626774e9bb2044fe273d35dfa, type: 3}
   m_Name: Test Level Requirement
   m_EditorClassIdentifier: Assembly-CSharp::Core.SkillsTree.Requirement.LevelRequirement
-  RequiredLevel: 0
+  RequiredLevel: 1
